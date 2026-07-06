@@ -29,7 +29,7 @@ public:
     std::expected<std::vector<uint8_t>, IOError> LoadMetadata(const std::string &metadata_path);
 
     template <typename T>
-    std::expected<T, IOError> ReadValue(const std::vector<uint8_t>& metadata, const size_t offset) {
+    std::expected<T, IOError> ReadValue(const std::vector<uint8_t>& metadata, const size_t offset) const {
         if (offset + sizeof(T) > metadata.size()) {
             return std::unexpected(IOError::OutOfRange);
         }
