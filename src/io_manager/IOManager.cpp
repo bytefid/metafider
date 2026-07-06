@@ -9,6 +9,9 @@ std::expected<std::vector<uint8_t>, IOError> IOManager::LoadMetadata(const std::
     }
 
     const std::streamsize size = file.tellg();
+    if (size < 0) {
+        return std::unexpected(IOError::ReadError);
+    }
     file.seekg(0, std::ios::beg);
 
     std::vector<uint8_t> buffer(size);
