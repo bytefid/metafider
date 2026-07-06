@@ -12,7 +12,7 @@ enum class IOError {
     OutOfRange,
 };
 
-constexpr std::string_view ToCString(const IOError error) {
+static constexpr std::string_view ToCString(const IOError error) {
     switch (error) {
         case IOError::OpenError:   return "Failed to open file (OpenError)";
         case IOError::ReadError:   return "Failed to read file data (ReadError)";
