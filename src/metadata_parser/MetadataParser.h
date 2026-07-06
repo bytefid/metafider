@@ -5,9 +5,6 @@
 #include <vector>
 #include "../io_manager/IOManager.h"
 
-enum class ParserError {
-
-};
 
 class MetadataParser {
 public:
