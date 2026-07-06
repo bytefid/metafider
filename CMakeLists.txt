@@ -8,4 +8,6 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_executable(metafider src/main.cpp
         src/io_manager/IOManager.cpp
         src/io_manager/IOManager.h
+        src/metadata_parser/MetadataParser.cpp
+        src/metadata_parser/MetadataParser.h
 )
