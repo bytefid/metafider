@@ -2,7 +2,7 @@
 #include "metadata_parser/MetadataParser.h"
 
 int main() {
-    printf("Hello World!\n");
+    std::print("Hello World!\n");
     IOManager io_manager;
     const auto metadata_result = io_manager.LoadMetadata("meta_raw.dat");
     if (!metadata_result.has_value()) {
