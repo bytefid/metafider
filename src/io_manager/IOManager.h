@@ -44,7 +44,7 @@ public:
             return std::unexpected(IOError::OutOfRange);
         }
         std::vector<T> result(count);
-        std::memcpy(result.data(), buffer.data() + offset, total_size);
+        std::memcpy(result.data(), metadata.data() + offset, total_size);
         return result;
     }
 };
