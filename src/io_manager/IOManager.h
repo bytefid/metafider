@@ -4,6 +4,7 @@
 #include <expected>
 #include <ios>
 #include <string>
+#include <string_view>
 #include <vector>
 
 enum class IOError {
