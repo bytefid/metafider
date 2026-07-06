@@ -6,6 +6,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(metafider src/main.cpp
-        src/iomanager/IOManager.cpp
-        src/iomanager/IOManager.h
+        src/io_manager/IOManager.cpp
+        src/io_manager/IOManager.h
 )
