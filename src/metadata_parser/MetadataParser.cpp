@@ -1,5 +1,4 @@
 #include "MetadataParser.h"
-#include <print>
 
 MetadataParser::MetadataParser(IOManager& io_manager, const std::vector<uint8_t>& metadata)
     : m_io_manager(io_manager), m_metadata(metadata) {}
