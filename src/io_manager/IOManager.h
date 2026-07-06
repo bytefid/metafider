@@ -25,7 +25,7 @@ class IOManager {
 public:
     IOManager() = default;
 
-    static std::expected<std::vector<uint8_t>, IOError> LoadMetadata(const std::string &metadata_path);
+    std::expected<std::vector<uint8_t>, IOError> LoadMetadata(const std::string &metadata_path);
 
     template <typename T>
     std::expected<T, IOError> ReadValue(const std::vector<uint8_t>& metadata, const size_t offset) {
