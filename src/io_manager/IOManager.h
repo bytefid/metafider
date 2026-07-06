@@ -6,6 +6,7 @@
 #include <string>
 #include <string_view>
 #include <vector>
+#include <cstring>
 
 enum class IOError {
     OpenError,
