@@ -40,7 +40,7 @@ public:
     template <typename T>
     std::expected<std::vector<T>, IOError> ReadArray(const std::vector<uint8_t>& metadata, const size_t offset, size_t count) {
         const size_t total_size = count * sizeof(T);
-        if (offset + total_size > buffer.size()) {
+        if (offset + total_size > metadata.size()) {
             return std::unexpected(IOError::OutOfRange);
         }
         std::vector<T> result(count);
