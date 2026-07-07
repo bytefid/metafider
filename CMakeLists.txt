@@ -14,5 +14,10 @@ add_executable(metafider src/main.cpp
         src/heuristics/Heuristics.h
         src/metafider_app/MetafiderApp.cpp
         src/metafider_app/MetafiderApp.h
+        src/config/ConfigLoader.cpp
+        src/config/ConfigLoader.h
 )
+
+find_package(nlohmann_json CONFIG REQUIRED)
+target_link_libraries(metafider PRIVATE nlohmann_json::nlohmann_json)
 target_include_directories(metafider PRIVATE ${CMAKE_SOURCE_DIR}/src)
