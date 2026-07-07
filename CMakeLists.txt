@@ -10,4 +10,6 @@ add_executable(metafider src/main.cpp
         src/io_manager/IOManager.h
         src/metadata_parser/MetadataParser.cpp
         src/metadata_parser/MetadataParser.h
+        src/heuristics/Heuristics.cpp
+        src/heuristics/Heuristics.h
 )
