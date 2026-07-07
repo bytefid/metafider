@@ -1,5 +1,7 @@
 #include "MetadataParser.h"
 
+#include <algorithm>
+
 MetadataParser::MetadataParser(IOManager& io_manager, Heuristics& heuristics, const std::vector<uint8_t>& metadata)
     : m_io_manager(io_manager), m_heuristics(heuristics), m_metadata(metadata) {}
 
@@ -28,6 +30,10 @@ std::expected<std::vector<uint32_t>, IOE::IOError> MetadataParser::ParseOffsets(
             probable_offsets.push_back(field);
         }
     }
+
+    std::sort(probable_offsets.begin(), probable_offsets.end());
+    const auto last = std::unique(probable_offsets.begin(), probable_offsets.end());
+    probable_offsets.erase(last, probable_offsets.end());
 
     return probable_offsets;
 }
