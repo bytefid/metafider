@@ -21,7 +21,6 @@ int main() {
     if (!fields_result.has_value()) {
         return 1;
     }
-
     const auto& fields = fields_result.value();
     std::print("Parsed {} fields successfully.\n", fields.size());
 
@@ -33,6 +32,9 @@ int main() {
 
     const auto& offsets = offsets_result.value();
     std::print("Found {} probable offsets.\n", offsets.size());
+    for (size_t i = 0; i < offsets.size(); ++i) {
+        std::print("[{}]: {:#010x}\n", i+1, offsets[i]);
+    }
 
     return 0;
 }
