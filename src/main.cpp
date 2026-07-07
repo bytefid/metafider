@@ -9,18 +9,18 @@ int main() {
         std::print("Failed to load config: {}\n", IO::ToCString(config_result.error()));
         return 1;
     }
-    const auto& config = config_result.value();
+    const auto& app_config = config_result.value();
 
     MetafiderApp main_app;
-    if (!main_app.Init(config.offset_heuristics)) {
+    if (!main_app.Init(app_config)) {
         return 1;
     }
 
-    if (!main_app.Load(config.metadata_path)) {
+    if (!main_app.Load()) {
         return 1;
     }
 
-    main_app.Parse(config.header_size);
+    main_app.Parse();
     main_app.PrintData();
 
     return 0;

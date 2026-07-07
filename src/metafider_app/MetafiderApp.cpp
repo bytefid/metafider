@@ -4,15 +4,16 @@
 #include "metadata_parser/MetadataParser.h"
 
 
-bool MetafiderApp::Init(const HProperties::OffsetHeuristics offset_heuristics) {
+bool MetafiderApp::Init(const metafider::config::AppConfig &app_config) {
+    config = app_config;
     io_manager = IOManager();
     heuristics = Heuristics();
-    heuristics.SetOffsetHeuristics(offset_heuristics);
+    heuristics.SetOffsetHeuristics(config.offset_heuristics);
     return true;
 }
 
-bool MetafiderApp::Load(const std::string &metadata_path) {
-    const auto metadata_result = io_manager.LoadMetadata(metadata_path);
+bool MetafiderApp::Load() {
+    const auto metadata_result = io_manager.LoadMetadata(config.metadata_path);
     if (!metadata_result.has_value()) {
         std::print("Init error: {}\n", IO::ToCString(metadata_result.error()));
         return false;
@@ -22,8 +23,8 @@ bool MetafiderApp::Load(const std::string &metadata_path) {
     return true;
 }
 
-bool MetafiderApp::Parse(const size_t header_size) {
-    if (const auto fields_result = metadata_parser.value().ParseFields(header_size); !fields_result.has_value()) {
+bool MetafiderApp::Parse() {
+    if (const auto fields_result = metadata_parser.value().ParseFields(config.header_size); !fields_result.has_value()) {
         std::print("Parse error: {}\n", IO::ToCString(fields_result.error()));
         return false;
     }

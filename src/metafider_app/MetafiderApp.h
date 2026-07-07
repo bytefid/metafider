@@ -3,23 +3,21 @@
 
 #include <optional>
 
+#include "config/ConfigLoader.h"
 #include "io_manager/IOManager.h"
 #include "heuristics/Heuristics.h"
 #include "metadata_parser/MetadataParser.h"
 
 class MetafiderApp {
 public:
-    bool Init();
-    bool Load(const std::string &metadata_path);
+    bool Init(const metafider::config::AppConfig &config);
+    bool Load();
     bool Parse();
 
     void PrintData() const;
 
-    bool Init(HProperties::OffsetHeuristics offset_heuristics);
-
-    bool Parse(size_t header_size);
-
 private:
+    metafider::config::AppConfig config = {};
     IOManager io_manager;
     Heuristics heuristics;
     std::shared_ptr<std::vector<uint8_t>> metadata;
