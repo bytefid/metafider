@@ -14,13 +14,13 @@ public:
     bool Load();
     bool Parse();
 
+
     void PrintData() const;
 
 private:
     metafider::config::AppConfig config = {};
     IOManager io_manager;
     Heuristics heuristics;
-    std::shared_ptr<std::vector<uint8_t>> metadata;
     std::optional<MetadataParser> metadata_parser;
 };
 

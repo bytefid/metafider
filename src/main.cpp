@@ -21,7 +21,6 @@ int main() {
     }
 
     main_app.Parse();
-    main_app.PrintData();
 
     return 0;
 }

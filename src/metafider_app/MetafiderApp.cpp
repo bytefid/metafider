@@ -18,8 +18,7 @@ bool MetafiderApp::Load() {
         std::print("Init error: {}\n", IO::ToCString(metadata_result.error()));
         return false;
     }
-    metadata = std::make_shared<std::vector<uint8_t>>(metadata_result.value());
-    metadata_parser.emplace(io_manager, heuristics, metadata);
+    metadata_parser.emplace(io_manager, heuristics, std::make_shared<std::vector<uint8_t>>(metadata_result.value()));
     return true;
 }
 

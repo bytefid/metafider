@@ -22,6 +22,8 @@ public:
     MetadataParser(IOManager& io_manager, Heuristics& heuristics, std::shared_ptr<const std::vector<uint8_t>> metadata);
     MetadataParsed::data GetParsedData() const;
 
+    std::vector<uint8_t> GetMetadata() const;
+
     std::expected<bool, IO::Error> ParseFields(size_t header_size);
     std::expected<bool, IO::Error> ParseOffsets(const std::vector<uint32_t>& fields);
 private:

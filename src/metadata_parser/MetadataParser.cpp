@@ -7,6 +7,8 @@ MetadataParser::MetadataParser(IOManager& io_manager, Heuristics& heuristics, st
 
 MetadataParsed::data MetadataParser::GetParsedData() const { return m_data; }
 
+std::vector<uint8_t> MetadataParser::GetMetadata() const { return *m_metadata; }
+
 std::expected<bool, IO::Error> MetadataParser::ParseFields(const size_t header_size) {
     std::vector<uint32_t> fields;
 
