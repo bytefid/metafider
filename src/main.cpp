@@ -12,7 +12,7 @@ int main() {
 
     Heuristics heuristics;
     heuristics.SetOffsetHeuristics(
-        {0, 4, 16, true}
+        {0, 2, 32, true}
         );
 
     MetadataParser parser(io_manager, heuristics, metadata);
