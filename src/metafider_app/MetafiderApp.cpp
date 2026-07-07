@@ -4,15 +4,10 @@
 #include "metadata_parser/MetadataParser.h"
 
 
-bool MetafiderApp::Init() {
+bool MetafiderApp::Init(const HProperties::OffsetHeuristics offset_heuristics) {
     io_manager = IOManager();
     heuristics = Heuristics();
-    heuristics.SetOffsetHeuristics({
-        .greater_than_value = 0,
-        .divisible_by = 2,
-        .size_divisor = 32,
-        .require_in_bounds = true
-    });
+    heuristics.SetOffsetHeuristics(offset_heuristics);
     return true;
 }
 
@@ -27,8 +22,8 @@ bool MetafiderApp::Load(const std::string &metadata_path) {
     return true;
 }
 
-bool MetafiderApp::Parse() {
-    if (const auto fields_result = metadata_parser.value().ParseFields(380); !fields_result.has_value()) {
+bool MetafiderApp::Parse(const size_t header_size) {
+    if (const auto fields_result = metadata_parser.value().ParseFields(header_size); !fields_result.has_value()) {
         std::print("Parse error: {}\n", IO::ToCString(fields_result.error()));
         return false;
     }

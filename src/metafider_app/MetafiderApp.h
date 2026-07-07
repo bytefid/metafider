@@ -14,6 +14,11 @@ public:
     bool Parse();
 
     void PrintData() const;
+
+    bool Init(HProperties::OffsetHeuristics offset_heuristics);
+
+    bool Parse(size_t header_size);
+
 private:
     IOManager io_manager;
     Heuristics heuristics;
