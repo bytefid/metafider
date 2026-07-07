@@ -1,20 +1,20 @@
 #include "Heuristics.h"
 
-void Heuristics::SetOffsetHeuristics(const HConfig::OffsetHeuristics &OffsetHeuristics) {
+void Heuristics::SetOffsetHeuristics(const HProperties::OffsetHeuristics &OffsetHeuristics) {
     m_offset_heuristics = OffsetHeuristics;
 }
 
 bool Heuristics::IsProbableOffset(
         const std::vector<uint8_t>& metadata,
         const uint32_t field
-    ) {
+    ) const {
     if (m_offset_heuristics.divisible_by > 1) {
         if (field % m_offset_heuristics.divisible_by != 0) {
             return false;
         }
     }
 
-    if (field <= m_offset_heuristics.greater_than_value) {
+    if (field != 0 && field <= m_offset_heuristics.greater_than_value) {
         return false;
     }
 

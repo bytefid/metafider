@@ -8,33 +8,34 @@
 #include <cstring>
 
 
-namespace IOE {
-    enum class IOError {
+namespace IO {
+    enum class Error {
         OpenError,
         ReadError,
         OutOfRange,
     };
 
-    static constexpr std::string_view ToCString(const IOError error) {
+    static constexpr std::string_view ToCString(const Error error) {
         switch (error) {
-            case IOError::OpenError:   return "Failed to open file (OpenError)";
-            case IOError::ReadError:   return "Failed to read file data (ReadError)";
-            case IOError::OutOfRange:  return "Attempted to read out of bounds (OutOfRange)";
+            case Error::OpenError:   return "Failed to open file (OpenError)";
+            case Error::ReadError:   return "Failed to read file data (ReadError)";
+            case Error::OutOfRange:  return "Attempted to read out of bounds (OutOfRange)";
             default:                   return "Unknown IO Error";
         }
     }
 }
 
+
 class IOManager {
 public:
     IOManager() = default;
 
-    std::expected<std::vector<uint8_t>, IOE::IOError> LoadMetadata(const std::string &metadata_path);
+    std::expected<std::vector<uint8_t>, IO::Error> LoadMetadata(const std::string &metadata_path);
 
     template <typename T>
-    std::expected<T, IOE::IOError> ReadValue(const std::vector<uint8_t>& metadata, const size_t offset) const {
+    std::expected<T, IO::Error> ReadValue(const std::vector<uint8_t>& metadata, const size_t offset) const {
         if (offset + sizeof(T) > metadata.size()) {
-            return std::unexpected(IOE::IOError::OutOfRange);
+            return std::unexpected(IO::Error::OutOfRange);
         }
         T value;
         std::memcpy(&value, metadata.data() + offset, sizeof(T));
@@ -42,10 +43,10 @@ public:
     }
 
     template <typename T>
-    std::expected<std::vector<T>, IOE::IOError> ReadArray(const std::vector<uint8_t>& metadata, const size_t offset, size_t count) const {
+    std::expected<std::vector<T>, IO::Error> ReadArray(const std::vector<uint8_t>& metadata, const size_t offset, size_t count) const {
         const size_t total_size = count * sizeof(T);
         if (offset + total_size > metadata.size()) {
-            return std::unexpected(IOE::IOError::OutOfRange);
+            return std::unexpected(IO::Error::OutOfRange);
         }
         std::vector<T> result(count);
         std::memcpy(result.data(), metadata.data() + offset, total_size);

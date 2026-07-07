@@ -12,4 +12,7 @@ add_executable(metafider src/main.cpp
         src/metadata_parser/MetadataParser.h
         src/heuristics/Heuristics.cpp
         src/heuristics/Heuristics.h
+        src/metafider_app/MetafiderApp.cpp
+        src/metafider_app/MetafiderApp.h
 )
+target_include_directories(metafider PRIVATE ${CMAKE_SOURCE_DIR}/src)

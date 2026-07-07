@@ -5,28 +5,28 @@
 #include <cstdint>
 #include <cstddef>
 
-namespace HConfig {
+namespace HProperties {
     struct OffsetHeuristics {
-        uint32_t greater_than_value = 8192;
-        uint32_t divisible_by = 4;
-        uint32_t size_divisor = 8;
-        bool require_in_bounds = true;
+        uint32_t greater_than_value;
+        uint32_t divisible_by;
+        uint32_t size_divisor;
+        bool require_in_bounds;
     };
 }
 
 class Heuristics {
-private:
-    HConfig::OffsetHeuristics m_offset_heuristics = {};
-
 public:
     Heuristics() = default;
 
-    void SetOffsetHeuristics(const HConfig::OffsetHeuristics& OffsetHeuristics);
+    void SetOffsetHeuristics(const HProperties::OffsetHeuristics& OffsetHeuristics);
 
     bool IsProbableOffset(
         const std::vector<uint8_t>& metadata,
         uint32_t field
-    );
+    ) const;
+
+private:
+    HProperties::OffsetHeuristics m_offset_heuristics = {};
 };
 
 #endif //METAFIDER_HEURISTICS_H
