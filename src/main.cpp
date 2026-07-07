@@ -10,7 +10,12 @@ int main() {
     }
     const auto& metadata = metadata_result.value();
 
-    MetadataParser parser(io_manager, metadata);
+    Heuristics heuristics;
+    heuristics.SetOffsetHeuristics(
+        {0, 4, 16, true}
+        );
+
+    MetadataParser parser(io_manager, heuristics, metadata);
 
     const auto fields_result = parser.ParseFields(380);
     if (!fields_result.has_value()) {
@@ -20,9 +25,8 @@ int main() {
     const auto& fields = fields_result.value();
     std::print("Parsed {} fields successfully.\n", fields.size());
 
-    constexpr OffsetHeuristics heuristics{};
 
-    const auto offsets_result = parser.ParseOffsets(fields, heuristics);
+    const auto offsets_result = parser.ParseOffsets(fields);
     if (!offsets_result.has_value()) {
         return 1;
     }
