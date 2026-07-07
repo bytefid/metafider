@@ -20,5 +20,15 @@ int main() {
     const auto& fields = fields_result.value();
     std::print("Parsed {} fields successfully.\n", fields.size());
 
+    constexpr OffsetHeuristics heuristics{};
+
+    const auto offsets_result = parser.ParseOffsets(fields, heuristics);
+    if (!offsets_result.has_value()) {
+        return 1;
+    }
+
+    const auto& offsets = offsets_result.value();
+    std::print("Found {} probable offsets.\n", offsets.size());
+
     return 0;
 }
