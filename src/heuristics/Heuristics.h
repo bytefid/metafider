@@ -1,0 +1,9 @@
+#ifndef METAFIDER_HEURISTICS_H
+#define METAFIDER_HEURISTICS_H
+
+
+class Heuristics {
+};
+
+
+#endif //METAFIDER_HEURISTICS_H
