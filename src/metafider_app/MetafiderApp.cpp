@@ -28,12 +28,18 @@ bool MetafiderApp::Parse() {
         return false;
     }
 
-    const MetadataParsed::data data = metadata_parser.value().GetParsedData();
+    std::print("Fields parse successfully ({}).\n", metadata_parser.value().GetParsedData().fields.size());
 
-    if (const auto offsets_result = metadata_parser.value().ParseOffsets(data.fields); !offsets_result.has_value()) {
+    if (const auto offsets_result = metadata_parser.value().ParseOffsets(metadata_parser.value().GetParsedData().fields); !offsets_result.has_value()) {
         std::print("Parse error: {}\n", IO::ToCString(offsets_result.error()));
         return false;
     }
+
+    std::print("Offsets parse successfully ({}).\n", metadata_parser.value().GetParsedData().offsets.size() );
+    for (size_t i = 0; i < metadata_parser.value().GetParsedData().offsets.size(); ++i) {
+        std::print("[{}]: {:#010x}\n", i+1, metadata_parser.value().GetParsedData().offsets[i]);
+    }
+
     return true;
 }
 
